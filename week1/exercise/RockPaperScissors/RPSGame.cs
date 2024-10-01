@@ -11,14 +11,14 @@
 
     public void gameStart() {
         Console.WriteLine("Welcome to Rock Paper Scissor Game!");
-        Console.WriteLine("Please enter 1 for Rock, 2 for Paper, and 3 for Scissor");
         string ending = "Y";
         while (ending != "N") {
         Console.WriteLine("=====================================================");
+        Console.WriteLine("Please enter 1 for Rock, 2 for Paper, and 3 for Scissor");
         int userChoice = getUserChoice();
+        Console.WriteLine("User chose: {0}",handName[userChoice-1]);
         int computerChoice = getComputerChoice();
-        Console.WriteLine("computer choose: ");
-        Console.WriteLine(handName[computerChoice-1]);
+        Console.WriteLine("computer chose: {0}",handName[computerChoice-1]);
         int result = getResult(userChoice,computerChoice);
         handleResult(result);
         Console.WriteLine("Player Score: {0} ; Computer Score: {1} ",playerScore,computerScore);
