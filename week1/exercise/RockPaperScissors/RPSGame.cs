@@ -21,6 +21,7 @@
         Console.WriteLine(handName[computerChoice-1]);
         int result = getResult(userChoice,computerChoice);
         handleResult(result);
+        Console.WriteLine("Player Score: {0} ; Computer Score: {1} ",playerScore,computerScore);
         Console.WriteLine("you want to play again ? (Y/N)");
         ending = Console.ReadLine();
         }
