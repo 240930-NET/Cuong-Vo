@@ -1,0 +1,15 @@
+C:\training\240930-NET\Cuong-Vo\week1\P0-SalonSystem\obj\Debug\net8.0\P0-SalonSystem.GeneratedMSBuildEditorConfig.editorconfig
+C:\training\240930-NET\Cuong-Vo\week1\P0-SalonSystem\obj\Debug\net8.0\P0-SalonSystem.AssemblyInfoInputs.cache
+C:\training\240930-NET\Cuong-Vo\week1\P0-SalonSystem\obj\Debug\net8.0\P0-SalonSystem.AssemblyInfo.cs
+C:\training\240930-NET\Cuong-Vo\week1\P0-SalonSystem\obj\Debug\net8.0\P0-SalonSystem.csproj.CoreCompileInputs.cache
+C:\training\240930-NET\Cuong-Vo\week1\P0-SalonSystem\obj\Debug\net8.0\P0-SalonSystem.sourcelink.json
+C:\training\240930-NET\Cuong-Vo\week1\P0-SalonSystem\bin\Debug\net8.0\P0-SalonSystem.exe
+C:\training\240930-NET\Cuong-Vo\week1\P0-SalonSystem\bin\Debug\net8.0\P0-SalonSystem.deps.json
+C:\training\240930-NET\Cuong-Vo\week1\P0-SalonSystem\bin\Debug\net8.0\P0-SalonSystem.runtimeconfig.json
+C:\training\240930-NET\Cuong-Vo\week1\P0-SalonSystem\bin\Debug\net8.0\P0-SalonSystem.dll
+C:\training\240930-NET\Cuong-Vo\week1\P0-SalonSystem\bin\Debug\net8.0\P0-SalonSystem.pdb
+C:\training\240930-NET\Cuong-Vo\week1\P0-SalonSystem\obj\Debug\net8.0\P0-SalonSystem.dll
+C:\training\240930-NET\Cuong-Vo\week1\P0-SalonSystem\obj\Debug\net8.0\refint\P0-SalonSystem.dll
+C:\training\240930-NET\Cuong-Vo\week1\P0-SalonSystem\obj\Debug\net8.0\P0-SalonSystem.pdb
+C:\training\240930-NET\Cuong-Vo\week1\P0-SalonSystem\obj\Debug\net8.0\P0-SalonSystem.genruntimeconfig.cache
+C:\training\240930-NET\Cuong-Vo\week1\P0-SalonSystem\obj\Debug\net8.0\ref\P0-SalonSystem.dll
