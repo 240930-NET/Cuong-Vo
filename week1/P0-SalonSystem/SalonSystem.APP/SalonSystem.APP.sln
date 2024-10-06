@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.002.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SalonSystem.APP", "SalonSystem.APP.csproj", "{F24F0A1E-0043-40BD-B843-ED31ABA7379D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F24F0A1E-0043-40BD-B843-ED31ABA7379D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F24F0A1E-0043-40BD-B843-ED31ABA7379D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F24F0A1E-0043-40BD-B843-ED31ABA7379D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F24F0A1E-0043-40BD-B843-ED31ABA7379D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C4D905C7-ECBB-4094-9843-17C3A6BD2A04}
+	EndGlobalSection
+EndGlobal
