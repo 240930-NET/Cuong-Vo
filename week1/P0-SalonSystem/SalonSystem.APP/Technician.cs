@@ -7,7 +7,7 @@ using SalonSystem.APP.Services;
 namespace SalonSystem.APP.Technicians;
 public class Technician : Employee
 {
-    public List<Skill> SkillSet {get; private set;}
+    public List<Skill> SkillSet {get; set;}
 
     public Technician (int id, string name, int salary, PayPeriod payPeriodType = PayPeriod.Weekly)
         :base(id,name,salary,payPeriodType) 

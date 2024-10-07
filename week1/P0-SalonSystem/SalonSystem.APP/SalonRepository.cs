@@ -24,6 +24,10 @@ public static class SalonRepository
         if (!File.Exists(filePath)) return new List<Salon>();
 
         string jsonData = File.ReadAllText(filePath);
+        if (string.IsNullOrWhiteSpace(jsonData))
+        {
+        throw new InvalidOperationException("The file is empty or contains invalid JSON.");
+        }
         return JsonSerializer.Deserialize<List<Salon>>(jsonData);
         
     }

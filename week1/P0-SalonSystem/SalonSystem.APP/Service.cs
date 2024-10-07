@@ -28,6 +28,24 @@ public class Service {
 
     public bool CanBePerformedBy(Technician technician)
     {
-        return RequiredSkills.All(skill => technician.SkillSet.Contains(skill));
+        //return RequiredSkills.All(skill => technician.SkillSet.Contains(skill));
+        foreach (Skill requiredSkill in RequiredSkills) 
+        {
+            bool hasSkill = false;
+
+            foreach (Skill techSkill in technician.SkillSet) 
+            {
+                //Console.WriteLine($"Checking skill {techSkill.Name} against required skill {requiredSkill.Name}");
+                if ( requiredSkill.Name == techSkill.Name) {
+                    hasSkill = true;
+                    break;
+                }
+                //Console.WriteLine(hasSkill);
+            }
+            if (!hasSkill) return false;
+        }
+        return true;
     }
+
+    
 }

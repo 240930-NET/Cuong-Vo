@@ -2,21 +2,52 @@
   {
     "TechnicianList": [
       {
-        "SkillSet": [],
+        "SkillSet": [
+          {
+            "Name": "Women Haircut",
+            "Duration": -1
+          },
+          {
+            "Name": "Man Haircut",
+            "Duration": -1
+          }
+        ],
         "ID": 1,
         "Name": "Abby",
         "Salary": 1000,
         "PayPeriodType": 1
       },
       {
-        "SkillSet": [],
+        "SkillSet": [
+          {
+            "Name": "Man Haircut",
+            "Duration": -1
+          }
+        ],
         "ID": 2,
         "Name": "Bradon",
         "Salary": 800,
         "PayPeriodType": 1
       },
       {
-        "SkillSet": [],
+        "SkillSet": [
+          {
+            "Name": "Women Haircut",
+            "Duration": -1
+          },
+          {
+            "Name": "Manicure",
+            "Duration": -1
+          },
+          {
+            "Name": "Acrylic Nails",
+            "Duration": -1
+          },
+          {
+            "Name": "Shellac",
+            "Duration": -1
+          }
+        ],
         "ID": 1,
         "Name": "Cecelia",
         "Salary": 1200,

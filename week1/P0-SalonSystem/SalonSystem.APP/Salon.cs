@@ -33,6 +33,13 @@ public class Salon {
         TechnicianList.Add(technician);
     }
 
+    public Service? findServiceByName(string name) {
+        foreach (Service service in ServiceList) {
+            if (service.Name == name) return service;
+        }
+        return null; 
+    }
+
     public List<Technician> FindTechnicianToPerform(Service service) 
     {
         List<Technician> qualifiedTechnicians = new List<Technician>();
@@ -47,6 +54,8 @@ public class Salon {
     public void AddTechnician(string name, int salary, PayPeriod payPeriodType = PayPeriod.Weekly) {
         TechnicianList.Add(new Technician(_technicianIDCounter++,name,salary,payPeriodType));
     }
+
+    public void AddService(string name, int duration = -1) => ServiceList.Add(new Service(name));
     //Set Working Hour for the salon.
     public void SetWorkingHours(DayOfWeek day, TimeSpan openingTime, TimeSpan closingTime)
     {

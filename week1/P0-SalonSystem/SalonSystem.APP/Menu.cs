@@ -67,8 +67,9 @@ public static class Menu {
             Console.WriteLine("2. Display Your Services");
             Console.WriteLine("3. Add Technicians");
             Console.WriteLine("4. Add Services");
-            Console.WriteLine("5. Show all appointments");
+            Console.WriteLine("5. Show all appointments <Under Development>");
             Console.WriteLine("6. Customer come in. What's service they want?");
+            Console.WriteLine("7. Display all tech with their skills");
             Console.WriteLine("9. Exit");
             option = MenuLogic.getUserIntegerInput();
             switch(option) 
@@ -87,16 +88,44 @@ public static class Menu {
                     break;
                 case 3:
                     Console.WriteLine("Please enter technician name: ");
+                    string techName = MenuLogic.GetStringInput();
+                    Console.WriteLine("Please enter salary for Weekly: ");
+                    int salary = MenuLogic.getUserIntegerInput();
+                    salon.AddTechnician(techName,salary);
+                    Console.WriteLine("Added successfuly!");
+                    break;
+                case 4:
+                    Console.WriteLine("Please enter Service name: ");
+                    string addServiceName = MenuLogic.GetStringInput();
+                    //Console.WriteLine($"Please enter {addServiceName}'s duration: ");
+                    //int addServiceDuration = MenuLogic.getUserIntegerInput();
+                    salon.AddService(addServiceName);
+                    Console.WriteLine("Added successfuly!");
                     break;
                 case 6: 
                     Console.WriteLine("Please enter service name:");
                     string serviceName = MenuLogic.GetStringInput();
+                    Service? foundService = salon.findServiceByName("Women Haircut");
+                    if (foundService is null ){
+                        Console.WriteLine("Service cannot be found!");
+                        break;
+                    }
                     Console.WriteLine($"Current Techncian can perform {serviceName}: ");
-                    List<Technician> qualifiedTech = salon.FindTechnicianToPerform(new Service(serviceName));
+                    List<Technician> qualifiedTech = salon.FindTechnicianToPerform(foundService);
                     foreach (Technician tech in qualifiedTech) {
                         Console.WriteLine(tech.Name);
                     }
                     break;
+                case 7:
+                    foreach(Technician technician in salon.TechnicianList)
+                        {
+                            Console.WriteLine($"{technician.ID}. {technician.Name}");
+                            foreach (Skill techSkill in technician.SkillSet) {
+                                Console.WriteLine($"\t {techSkill.Name}");
+                            }
+                        }
+                    break;
+
                 case 8:
                     Technician newTech = new Technician(3,"Cecelia", 1200, PayPeriod.Weekly);
                     newTech.AddSkill("Women Haircut");
