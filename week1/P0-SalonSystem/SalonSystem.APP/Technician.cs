@@ -4,7 +4,7 @@ using SalonSystem.APP.Skills;
 using SalonSystem.APP.Employees;
 using SalonSystem.APP.Services;
 
-namespace SalonSystem.APP.Techinicians;
+namespace SalonSystem.APP.Technicians;
 public class Technician : Employee
 {
     public List<Skill> SkillSet {get; private set;}

@@ -1,0 +1,50 @@
+[
+  {
+    "TechnicianList": [
+      {
+        "SkillSet": [],
+        "ID": 1,
+        "Name": "Abby",
+        "Salary": 1000,
+        "PayPeriodType": 1
+      },
+      {
+        "SkillSet": [],
+        "ID": 2,
+        "Name": "Bradon",
+        "Salary": 800,
+        "PayPeriodType": 1
+      },
+      {
+        "SkillSet": [],
+        "ID": 1,
+        "Name": "Cecelia",
+        "Salary": 1200,
+        "PayPeriodType": 1
+      }
+    ],
+    "ServiceList": [
+      {
+        "Name": "Men Haircut",
+        "RequiredSkills": [
+          {
+            "Name": "Men Haircut",
+            "Duration": -1
+          }
+        ]
+      },
+      {
+        "Name": "Women Haircut",
+        "RequiredSkills": [
+          {
+            "Name": "Women Haircut",
+            "Duration": -1
+          }
+        ]
+      }
+    ],
+    "ID": 1,
+    "Name": "Salon ONNE",
+    "WeeklyWorkingHours": {}
+  }
+]

@@ -15,7 +15,7 @@ public static class SalonRepository
         File.WriteAllText(filePath, jsonData);
     }
     /* Save the current state of all salon to file/database */
-    public static void saveAllSalon(Salon salons, string filePath) {
+    public static void saveAllSalon(List<Salon> salons, string filePath) {
         string jsonData = JsonSerializer.Serialize(salons, new JsonSerializerOptions {WriteIndented = true});
         File.WriteAllText(filePath, jsonData);
     }

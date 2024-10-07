@@ -1,7 +1,6 @@
 namespace SalonSystem.APP.Salons;
-
 using SalonSystem.APP.Services;
-using SalonSystem.APP.Techinicians;
+using SalonSystem.APP.Technicians;
 using SalonSystem.APP.WorkingHours;
 
 public class Salon {
@@ -21,10 +20,33 @@ public class Salon {
         _technicianIDCounter = 1;
         WeeklyWorkingHours = new Dictionary<DayOfWeek, WorkingHours>();
         TechnicianList = new List<Technician>();
+        ServiceList = new List<Service>();
     }
 
-    public void AddTechnician(Technician technician) => TechnicianList.Add(technician);
+    public void AddService(Service newService) {
+        ServiceList.Add(newService);
+    }
 
+    public void AddTechnician(Technician technician)
+    {
+        technician.ID = _technicianIDCounter++;
+        TechnicianList.Add(technician);
+    }
+
+    public List<Technician> FindTechnicianToPerform(Service service) 
+    {
+        List<Technician> qualifiedTechnicians = new List<Technician>();
+        foreach (Technician technician in TechnicianList) {
+            if (service.CanBePerformedBy(technician)) {
+                qualifiedTechnicians.Add(technician);
+            }
+        }
+        return qualifiedTechnicians;
+    }
+
+    public void AddTechnician(string name, int salary, PayPeriod payPeriodType = PayPeriod.Weekly) {
+        TechnicianList.Add(new Technician(_technicianIDCounter++,name,salary,payPeriodType));
+    }
     //Set Working Hour for the salon.
     public void SetWorkingHours(DayOfWeek day, TimeSpan openingTime, TimeSpan closingTime)
     {

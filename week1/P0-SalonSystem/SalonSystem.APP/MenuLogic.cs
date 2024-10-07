@@ -23,10 +23,10 @@ public static class MenuLogic
     {
         try  
         {
-            string stringInput = "";
-            while (stringInput != "") 
+            string? stringInput = "";
+            while (stringInput == "") 
             {
-                Console.ReadLine();
+                stringInput = Console.ReadLine();
                 if (stringInput == "") Console.WriteLine("string input cannot be empty. Please enter again.");
             }
             return stringInput;
