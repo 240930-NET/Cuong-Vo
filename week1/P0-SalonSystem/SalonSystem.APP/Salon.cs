@@ -1,5 +1,6 @@
 namespace SalonSystem.APP.Salons;
 
+using SalonSystem.APP.Services;
 using SalonSystem.APP.Techinicians;
 using SalonSystem.APP.WorkingHours;
 
@@ -7,7 +8,8 @@ public class Salon {
     // Static field to keep track of the last used ID
     private static int _idCounter = 1;
     private int _technicianIDCounter; 
-    public List<Technician> TechnicianLists {get;set;}
+    public List<Technician> TechnicianList {get;set;}
+    public List<Service> ServiceList {get;set;}
     public int ID{get; private set;}
     public string Name {get;set;}
     public Dictionary<DayOfWeek, WorkingHours> WeeklyWorkingHours { get; set; }
@@ -18,10 +20,10 @@ public class Salon {
         Name = name;
         _technicianIDCounter = 1;
         WeeklyWorkingHours = new Dictionary<DayOfWeek, WorkingHours>();
-        TechnicianLists = new List<Technician>();
+        TechnicianList = new List<Technician>();
     }
 
-    public void AddTechnician(Technician technician) => TechnicianLists.Add(technician);
+    public void AddTechnician(Technician technician) => TechnicianList.Add(technician);
 
     //Set Working Hour for the salon.
     public void SetWorkingHours(DayOfWeek day, TimeSpan openingTime, TimeSpan closingTime)
