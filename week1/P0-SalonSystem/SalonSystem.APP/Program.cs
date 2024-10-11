@@ -6,7 +6,7 @@ class Program
 {
     static void Main(string[] args)
     {
-        Menu.DisplayMainMenu(FilePathConfig.SalonDataPath);
+        Menu.DisplayMainMenu(FilePathConfig.SalonDataPath,Console.In,Console.Out);
 
     }
 }

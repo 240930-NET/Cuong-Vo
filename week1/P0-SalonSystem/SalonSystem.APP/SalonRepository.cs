@@ -23,6 +23,7 @@ public static class SalonRepository
     public static List<Salon>? LoadSalon(string filePath) {
         if (!File.Exists(filePath)) return new List<Salon>();
 
+
         string jsonData = File.ReadAllText(filePath);
         if (string.IsNullOrWhiteSpace(jsonData))
         {
@@ -31,9 +32,5 @@ public static class SalonRepository
         return JsonSerializer.Deserialize<List<Salon>>(jsonData);
         
     }
-
-
-
-    
 }
 

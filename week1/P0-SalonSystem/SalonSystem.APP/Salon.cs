@@ -5,8 +5,10 @@ using SalonSystem.APP.WorkingHours;
 
 public class Salon {
     // Static field to keep track of the last used ID
-    private static int _idCounter = 1;
-    private int _technicianIDCounter; 
+    //private static int _idCounter = 1;
+    public int _idCounter {get;set;}
+    //private int _technicianIDCounter; 
+    public int _technicianIDCounter {get;set;}
     public List<Technician> TechnicianList {get;set;}
     public List<Service> ServiceList {get;set;}
     public int ID{get; private set;}
@@ -40,6 +42,15 @@ public class Salon {
         return null; 
     }
 
+    public List<Technician> FindTechniciansByName(string name)
+    {
+        List<Technician> matchedTechnician = [];
+        foreach (Technician technician in TechnicianList) {
+            if (technician.Name == name) matchedTechnician.Add(technician);
+        }
+        return matchedTechnician;
+    }
+
     public List<Technician> FindTechnicianToPerform(Service service) 
     {
         List<Technician> qualifiedTechnicians = new List<Technician>();
@@ -51,12 +62,34 @@ public class Salon {
         return qualifiedTechnicians;
     }
 
-    public void AddTechnician(string name, int salary, PayPeriod payPeriodType = PayPeriod.Weekly) {
+    public void AddTechnician(string name, int salary, PayPeriod payPeriodType = PayPeriod.Weekly) 
+    {
         TechnicianList.Add(new Technician(_technicianIDCounter++,name,salary,payPeriodType));
     }
 
+    public Technician AddTechnicianAndReturn(string name, int salary, PayPeriod payPeriodType = PayPeriod.Weekly) 
+    {
+        Technician tech = new Technician(_technicianIDCounter++,name,salary,payPeriodType);
+        TechnicianList.Add(tech);
+        return tech;
+
+    }
+
+    public bool RemoveTechncianByID(int id) {
+        foreach (Technician tech in TechnicianList) {
+            if (tech.ID == id) 
+            {
+                TechnicianList.Remove(tech);
+                return true;
+            }
+        }
+        return false;
+    }
     public void AddService(string name, int duration = -1) => ServiceList.Add(new Service(name));
+
+    //For future development
     //Set Working Hour for the salon.
+    /*
     public void SetWorkingHours(DayOfWeek day, TimeSpan openingTime, TimeSpan closingTime)
     {
         WeeklyWorkingHours[day] = new WorkingHours(openingTime, closingTime);
@@ -77,6 +110,7 @@ public class Salon {
         if (WeeklyWorkingHours.ContainsKey(day)) return true;
         return false;
     }
+    */
 
     
 

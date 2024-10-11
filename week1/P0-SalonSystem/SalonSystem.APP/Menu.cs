@@ -5,128 +5,121 @@ using SalonSystem.APP.Technicians;
 using SalonSystem.APP.Services;
 using SalonSystem.APP.SalonRepository;
 using SalonSystem.APP.Skills;
+using System.ComponentModel.DataAnnotations;
+using System.Collections;
+
 public static class Menu {
-    public static void LoadingMessage() {
-        Console.Write("Loading......");
-    }
+  //  public static void LoadingMessage() {
+  //    writer.Write("Loading......");
+  //  }
     //Display main menu. The first menu when user use app.
-    public static void DisplayMainMenu(string filePath) 
+    public static void DisplayMainMenu(string filePath, TextReader reader, TextWriter writer) 
     {
         List<Salon>? SalonList = SalonRepository.LoadSalon(filePath);
-        Console.WriteLine("Welcome to Salon System!");
-        Console.WriteLine("Please let us know if you are: ");
-        Console.WriteLine("1. Existing user");
-        Console.WriteLine("2. New User (Creating new Salon)");
+        writer.WriteLine("Welcome to Salon System!");
+        writer.WriteLine("Please let us know if you are: ");
+        writer.WriteLine("1. Existing user");
+        writer.WriteLine("2. New User (Creating new Salon)");
+        writer.WriteLine("3. Exit");
         if (SalonList is null) SalonList = new List<Salon>();  
-        int option = MenuLogic.getUserIntegerInput();
+        int option = MenuLogic.getUserIntegerInput(reader,writer);
         int saveOption = 0;
         switch(option)
         {
             case 1:
-                int id = Menu.DisplayLoginMenu(SalonList);
+                int id = Menu.DisplayLoginMenu(reader,writer,SalonList);
                 if (id == -1) System.Environment.Exit(1);
-                else saveOption = Menu.DisplaySalonMenu(SalonList[id-1]);
+                else saveOption = Menu.DisplaySalonMenu(reader,writer,SalonList[id-1]);
                 break;
             case 2:
-                 Console.WriteLine("Great. Let's create your salon!");
-                 saveOption = Menu.DisplaySalonMenu(MenuLogic.CreatNewSalon(SalonList));
+                 writer.WriteLine("Great. Let's create your salon!");
+                 saveOption = Menu.DisplaySalonMenu(reader,writer,MenuLogic.CreatNewSalon(reader,writer,SalonList));
                  break;
+            case 3:
+                break;
         } 
         if (saveOption == 1) SalonRepository.saveAllSalon(SalonList, filePath);
     }
 
 
     //Display login menu where user login.
-    public static int DisplayLoginMenu(List<Salon> salonList)
+    public static int DisplayLoginMenu(TextReader reader, TextWriter writer,List<Salon> salonList)
     {
         while (true) {
-            Console.WriteLine("Please enter your ID or enter -1 to exit:");
-            int id = MenuLogic.getUserIntegerInput();
+            writer.WriteLine("Please enter your ID or enter -1 to exit:");
+            int id = MenuLogic.getUserIntegerInput(reader,writer);
             if (id == -1) return -1;
             if (id <= salonList.Count) 
             {
-                Console.WriteLine("Log in successfully!");
+                writer.WriteLine("Log in successfully!");
                 return id;
             }
             else 
             {
-                Console.WriteLine("Cannot find your ID. Plesae try again");
+                writer.WriteLine("Cannot find your ID. Plesae try again");
             }
         }
     }
 
-    //Display user's menu
+    //Display text for Salon's User
+        public static void DislayTextSalonMenu(TextWriter writer)
+    {
+            writer.WriteLine("");
+            writer.WriteLine("----------- Salon Menu -----------");
+            writer.WriteLine("Please choose the option: ");
+            writer.WriteLine("1. Display Salon Information");
+            writer.WriteLine("2. Display Technician Menu");
+            writer.WriteLine("3. Display ServiceMenu");
+            writer.WriteLine("4. Show all appointments <Under Development>");
+            writer.WriteLine("5. Customer come in. What's service they want?");
+            writer.WriteLine("7. Display all tech with their skills");
+            writer.WriteLine("9. Exit");
+    }
 
-    public static int DisplaySalonMenu(Salon salon) {
+    //Display user's menu
+    public static int DisplaySalonMenu(TextReader reader, TextWriter writer,Salon salon) 
+    {
         int option = 10;
-        Console.WriteLine($"Welcome owner of {salon.Name}");
+        writer.WriteLine($"Welcome owner of {salon.Name}");
         while (option != 9) {
-            Console.WriteLine("----------------------------------");
-            Console.WriteLine("Please choose the option: ");
-            Console.WriteLine("1. Display All Technicians");
-            Console.WriteLine("2. Display Your Services");
-            Console.WriteLine("3. Add Technicians");
-            Console.WriteLine("4. Add Services");
-            Console.WriteLine("5. Show all appointments <Under Development>");
-            Console.WriteLine("6. Customer come in. What's service they want?");
-            Console.WriteLine("7. Display all tech with their skills");
-            Console.WriteLine("9. Exit");
-            option = MenuLogic.getUserIntegerInput();
+            Menu.DislayTextSalonMenu(writer);
+            option = MenuLogic.getUserIntegerInput(reader,writer);
             switch(option) 
             {
                 case 1:
-                    foreach(Technician technician in salon.TechnicianList)
-                    {
-                        Console.WriteLine($"{technician.ID}. {technician.Name}");
-                    }
+                    MenuLogic.DisplaySalonInformation(writer,salon);
                     break;
                 case 2:
-                    foreach (Service service in salon.ServiceList)
-                    {
-                        Console.WriteLine($"{service.Name}");
-                    }
+                    Menu.DisplayTechnicianMenu(reader,writer,salon);
                     break;
                 case 3:
-                    Console.WriteLine("Please enter technician name: ");
-                    string techName = MenuLogic.GetStringInput();
-                    Console.WriteLine("Please enter salary for Weekly: ");
-                    int salary = MenuLogic.getUserIntegerInput();
-                    salon.AddTechnician(techName,salary);
-                    Console.WriteLine("Added successfuly!");
+                    Menu.DisplayServicenMenu(reader,writer,salon);
                     break;
-                case 4:
-                    Console.WriteLine("Please enter Service name: ");
-                    string addServiceName = MenuLogic.GetStringInput();
-                    //Console.WriteLine($"Please enter {addServiceName}'s duration: ");
-                    //int addServiceDuration = MenuLogic.getUserIntegerInput();
-                    salon.AddService(addServiceName);
-                    Console.WriteLine("Added successfuly!");
-                    break;
-                case 6: 
-                    Console.WriteLine("Please enter service name:");
-                    string serviceName = MenuLogic.GetStringInput();
-                    Service? foundService = salon.findServiceByName("Women Haircut");
+                case 5: 
+                    writer.WriteLine("Please enter service name:");
+                    string serviceName = MenuLogic.GetStringInput(reader,writer);
+                    Service? foundService = salon.findServiceByName(serviceName);
                     if (foundService is null ){
-                        Console.WriteLine("Service cannot be found!");
+                        writer.WriteLine("Service cannot be found!");
                         break;
                     }
-                    Console.WriteLine($"Current Techncian can perform {serviceName}: ");
+                    writer.WriteLine($"Current Techncian can perform {serviceName}: ");
                     List<Technician> qualifiedTech = salon.FindTechnicianToPerform(foundService);
                     foreach (Technician tech in qualifiedTech) {
-                        Console.WriteLine(tech.Name);
+                        writer.WriteLine(tech.Name);
                     }
                     break;
                 case 7:
-                    foreach(Technician technician in salon.TechnicianList)
-                        {
-                            Console.WriteLine($"{technician.ID}. {technician.Name}");
-                            foreach (Skill techSkill in technician.SkillSet) {
-                                Console.WriteLine($"\t {techSkill.Name}");
-                            }
-                        }
+
                     break;
 
-                case 8:
+                case 9:
+                    writer.WriteLine("Exiting");
+                    return 1;
+                default:
+                    writer.WriteLine("Not a valid option. Plesae choose again");
+                    break;
+                /*case 8:
                     Technician newTech = new Technician(3,"Cecelia", 1200, PayPeriod.Weekly);
                     newTech.AddSkill("Women Haircut");
                     newTech.AddSkill("Manicure");
@@ -134,19 +127,93 @@ public static class Menu {
                     newTech.AddSkill("Shellac");
                     salon.AddTechnician(newTech);
                     break;
-                case 9:
-                    Console.WriteLine("Exiting");
-                    return 1;
-                case -1:
-                    Console.WriteLine("Not a valid option. Plesae choose again");
-                    break;
+                    */
             }   
         }
         return 0;
         
     }
 
+    public static void DisplayTextTechnicianMenu(TextWriter writer) 
+    {
+        writer.WriteLine("");
+        writer.WriteLine("----------- Technician Menu -----------");
+        writer.WriteLine("Please choose the option from Technician Menu: ");
+        writer.WriteLine("1. Display All Technicians");
+        writer.WriteLine("2. Add a technicians");
+        writer.WriteLine("3. Delete  a technicians");
+        writer.WriteLine("4. Edit a Techncian -- under development");
+        writer.WriteLine("5. Return to Main Menu");
+    }
 
+    public static void DisplayTechnicianMenu(TextReader reader, TextWriter writer,Salon salon) 
+    {
+        int option = 10;
+        while (option != 5) 
+        {
+            Menu.DisplayTextTechnicianMenu(writer);
+            option = MenuLogic.getUserIntegerInput(reader,writer);
+            switch(option) 
+            {
+                case 1:
+                    MenuLogic.DisplayAllTechnician(writer,salon.TechnicianList);
+                    break;
+                case 2:
+                    MenuLogic.AddNewTechnicianFor(reader,writer,salon);
+                    break;
+                case 3:
+                    MenuLogic.RemoveTechncianFrom(reader,writer,salon);
+                    break;
+                case 5:
+                    break;
+                default:
+                    writer.WriteLine("Not a valid Input");
+                    break;
+            }
+        }
+    }
+
+        public static void DisplayTextServiceMenu(TextWriter writer) 
+    {
+        writer.WriteLine("");
+        writer.WriteLine("----------- Service Menu -----------");
+        writer.WriteLine("Please choose the option from Service Menu: ");
+        writer.WriteLine("1. Display All Servicess");
+        writer.WriteLine("2. Add a Service");
+        writer.WriteLine("3. Delete  a Service");
+        writer.WriteLine("4. Edit a Service <under development>");
+        writer.WriteLine("5. Return to Main Menu");
+    }
+
+        public static void DisplayServicenMenu(TextReader reader, TextWriter writer,Salon salon) 
+    {
+        int option = 10;
+        while (option != 5) 
+        {
+            Menu.DisplayTextServiceMenu(writer);
+            option = MenuLogic.getUserIntegerInput(reader,writer);
+            switch(option) 
+            {
+                case 1:
+                    MenuLogic.DisplayAllService(writer,salon.ServiceList);
+                    break;
+                case 2:
+                    MenuLogic.AddNewServiceTo(reader,writer,salon);
+                    break;
+                case 3:
+                    MenuLogic.RemoveServiceFrom(reader,writer,salon);
+                    break;
+                case 5:
+                    break;
+                //case 6:
+                //    Environment.Exit(1);
+                //   break;
+                default:
+                    writer.WriteLine("Not a valid Input");
+                    break;
+            }
+        }
+    }
 
        
 }

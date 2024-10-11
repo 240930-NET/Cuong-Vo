@@ -10,6 +10,7 @@ public class Service {
     public List<Skill> RequiredSkills {get;set;}
 
     public Service() {
+        Name = "No Name";
         RequiredSkills = new List<Skill>();
     }
     public Service(string name, List<Skill> requiredSkills) 
@@ -32,7 +33,6 @@ public class Service {
         foreach (Skill requiredSkill in RequiredSkills) 
         {
             bool hasSkill = false;
-
             foreach (Skill techSkill in technician.SkillSet) 
             {
                 //Console.WriteLine($"Checking skill {techSkill.Name} against required skill {requiredSkill.Name}");

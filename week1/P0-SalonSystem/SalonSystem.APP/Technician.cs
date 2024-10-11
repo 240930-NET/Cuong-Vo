@@ -22,4 +22,8 @@ public class Technician : Employee
     
     public void AddSkill(string skill, int duration = -1) => SkillSet.Add(new Skill(skill,duration));
     public void AddSkill(Skill skill) => SkillSet.Add(skill);
+    public void AddSkill(List<Skill> skillList) 
+    {
+        foreach (Skill skill in skillList ) SkillSet.Add(skill);
+    }
 }
